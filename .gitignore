@@ -1,0 +1,9 @@
+.idea/
+.obsidian/
+build/CMakeCache.txt
+build/CMakeFiles
+build/cmake_install.cmake  
+build/Makefile
+build/gameoflife
+build/unit_tests
+cmake-build-debug/

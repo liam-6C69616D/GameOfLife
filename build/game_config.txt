@@ -1,0 +1,3 @@
+Grid-Width:20
+Generations:40
+Out-File:output.txt
