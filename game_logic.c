@@ -89,7 +89,7 @@ int load_position_config() {
         if (grid.data == NULL) {
             return 1;
         }
-        if (row < 0 || col < 0 || row > grid.gridHeight || col > grid.gridWidth) {
+        if (row < 0 || col < 0 || row >= grid.gridHeight || col >= grid.gridWidth) {
             printf("\nThere is an invalid coordinate pair in the position_config.txt file! Read the README file for help with formatting!\n\n");
             return 1;
         }
