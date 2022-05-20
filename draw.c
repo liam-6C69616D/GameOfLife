@@ -63,11 +63,18 @@ void drawWindow() {
 
 	SDL_SetRenderDrawColor(app.renderer, 0, 0, 0, 255);
 
-	double cellSize = 525 / grid.gridWidth;
-	double drawingX = 137.5;
-	double drawingY = 25;
+	double cellSize = grid.gridWidth > grid.gridHeight ? 525 / grid.gridWidth : 525 / grid.gridHeight;
 
-	for (int i=0; i<grid.gridWidth; i++) {
+    for (int i=0; i<grid.gridHeight; i++) {
+        for (int j=0; j<grid.gridWidth; j++) {
+
+        }
+    }
+
+    double drawingX = SCREEN_WIDTH/2 - (grid.gridWidth * cellSize)/2;
+	double drawingY = 537.5/2 - (grid.gridHeight * cellSize)/2 + 15; // 537.5 accounts for buttons, +15 accounts for top text
+
+	for (int i=0; i<grid.gridHeight; i++) {
 		for (int j=0; j<grid.gridWidth; j++) {
 			SDL_Rect cell;
 			cell.x = drawingX;
@@ -81,7 +88,7 @@ void drawWindow() {
 			}
 			drawingX += cellSize;
 		}
-		drawingX = 137.5;
+        drawingX = SCREEN_WIDTH/2 - (grid.gridWidth * cellSize)/2;
 		drawingY += cellSize;
 	}
 
