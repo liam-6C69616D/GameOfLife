@@ -15,6 +15,7 @@
 
 typedef struct grid {
     int gridWidth; // Width of the grid
+    int gridHeight;
     int* data; // Pointer to data for the grid's cells
 } GameGrid;
 
