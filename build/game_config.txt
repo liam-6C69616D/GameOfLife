@@ -1,4 +1,4 @@
 Grid-Width:20
 Generations:40
 Out-File:output.txt
-Grid-Height:20
+Grid-Height:40

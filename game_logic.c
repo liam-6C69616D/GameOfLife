@@ -56,7 +56,7 @@ int load_position_config() {
     currentGeneration = 0;
     for (int i=0;i<grid.gridHeight; i++) {
         for (int j=0; j<grid.gridWidth; j++) {
-            *(grid.data + (i*grid.gridHeight) + j) = 0;
+            *(grid.data + (i*grid.gridWidth) + j) = 0;
         }
     }
 
