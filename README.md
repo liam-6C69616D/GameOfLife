@@ -21,7 +21,8 @@ The `position_config.txt` file takes coordinate pairs (one per line) separated b
 
 The `game_config.txt` file takes the following commands and format (commands are case sensitive and will throw CLI errors if any mistakes are found):
 ```
-Grid-Width: 20 # Width and height of the game grid, must be an integer
+Grid-Width: 20 # Width of the game grid, must be an integer
+Grid-Height: 25 # Height of the game grid, must be an integer
 Generations: 40 # The maximum nuber of generations the user can run, integer
 Out-File: output.txt # The name of a text file to write the output to
 ```

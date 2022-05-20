@@ -51,12 +51,12 @@ int load_position_config() {
     FILE* fp;
     fp = fopen("position_config.txt", "r");
     char* line = (char *) malloc (20);
-    grid.data = (int *) malloc (sizeof(int) * grid.gridWidth * grid.gridWidth);
+    grid.data = (int *) malloc (sizeof(int) * grid.gridWidth * grid.gridHeight);
 
     currentGeneration = 0;
-    for (int i=0;i<grid.gridWidth; i++) {
+    for (int i=0;i<grid.gridHeight; i++) {
         for (int j=0; j<grid.gridWidth; j++) {
-            *(grid.data + (i*grid.gridWidth + j)) = 0;
+            *(grid.data + (i*grid.gridWidth) + j) = 0;
         }
     }
 
@@ -89,7 +89,7 @@ int load_position_config() {
         if (grid.data == NULL) {
             return 1;
         }
-        if (row < 0 || col < 0 || row > grid.gridWidth || col > grid.gridWidth) {
+        if (row < 0 || col < 0 || row > grid.gridHeight || col > grid.gridWidth) {
             printf("\nThere is an invalid coordinate pair in the position_config.txt file! Read the README file for help with formatting!\n\n");
             return 1;
         }
@@ -110,6 +110,8 @@ int load_game_config() {
     bool widthSet = false;
     bool genSet = false;
     bool outSet = false;
+    bool heightSet = false;
+
     while(fgets(line, 100, fp)) {
         if (strcmp(line, "\n") == 0) {
             continue;
@@ -142,6 +144,15 @@ int load_game_config() {
                         grid.gridWidth = width;
                         widthSet = true;
                     }
+                } else if (strcmp(command, "Grid-Height") == 0) {
+                    int height = strtol(token, &ptr, 10);
+                    if (height < 1 || strcmp(ptr, "\n") != 0) {
+                        printf("\nValue given for 'Grid-Width' command was invalid! Read the README file for help!\n\n");
+                        return 1;
+                    } else {
+                        grid.gridHeight = height;
+                        heightSet = true;
+                    }
                 } else if (strcmp(command, "Generations") == 0) {
                     int genNum = strtol(token, &ptr, 10);
                     if (genNum < 1 || strcmp(ptr, "\n") != 0) {
@@ -169,13 +180,16 @@ int load_game_config() {
     if (!widthSet) {
         printf("\nThe grid width command was not supplied! Read the README file for help!\n\n");
     }
+    if (!heightSet) {
+        printf("\nThe grid height command was not supplied! Read the README file for help!\n\n");
+    }
     if (!genSet) {
         printf("\nThe max number of generations was not set! Read the README file for help!\n\n");
     }
     if (!outSet) {
         printf("\nThe out-file was not set! Read the README file for help!\n\n");
     }
-    if (widthSet && genSet && outSet) {
+    if (widthSet && genSet && outSet && heightSet) {
         return 0;
     } else {
         return 1;
