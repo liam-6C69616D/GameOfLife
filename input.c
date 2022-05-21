@@ -24,6 +24,11 @@ void readInput() {
             if (event.button.button == SDL_BUTTON_LEFT) {
                 int x = event.button.x;
                 int y = event.button.y;
+                double cellSize = grid.gridWidth > grid.gridHeight ? 525 / grid.gridWidth : 525 / grid.gridHeight;
+                double startX = SCREEN_WIDTH/2 - (grid.gridWidth * cellSize)/2;
+                double startY = 537.5/2 - (grid.gridHeight * cellSize)/2 + 15;
+                double endX = startX + (grid.gridWidth * cellSize);
+                double endY = startY + (grid.gridHeight * cellSize);
                 
                 if ((x>137.5 && x<262.5) && (y>562.5 && y<612.5)) {
                     if (currentGeneration == maxGenerations) {
@@ -47,6 +52,14 @@ void readInput() {
                 } else if ((x>537.5 && x<662.5) && (y>562.5 && y<612.5)) {
                     saveAndExit();
                     saveFilled = true;
+                } else if (((x>startX) && (y>startY)) && ((x<endX) && (x<endY))) {
+                    int row = (y - startY) / cellSize;
+                    int col = (x - startX) / cellSize;
+                    if (*(grid.data + (row*grid.gridWidth + col)) == 0) {
+                        *(grid.data + (row*grid.gridWidth + col)) = 1;
+                    } else if (*(grid.data + (row*grid.gridWidth + col)) == 1) {
+                        *(grid.data + (row*grid.gridWidth + col)) = 0;
+                    }
                 }
             }
             break;
