@@ -58,7 +58,7 @@ void readInput() {
                 } else if ((mouseX > 537.5 && mouseX < 662.5) && (mouseY > 562.5 && mouseY < 612.5)) {
                     saveAndExit();
                     saveFilled = true;
-                } else if (((mouseX > startX) && (mouseY > startY)) && ((mouseX < endX) && (mouseX < endY))) {
+                } else if (((mouseX > startX) && (mouseY > startY)) && ((mouseX < endX) && (mouseY < endY))) {
                     int row = (mouseY - startY) / cellSize;
                     int col = (mouseX - startX) / cellSize;
                     if (*(grid.data + (row*grid.gridWidth + col)) == 0) {
@@ -69,7 +69,7 @@ void readInput() {
                 rightMouseDown = true;
                 mouseX = event.button.x;
                 mouseY = event.button.y;
-                if (((mouseX > startX) && (mouseY > startY)) && ((mouseX < endX) && (mouseX < endY))) {
+                if (((mouseX > startX) && (mouseY > startY)) && ((mouseX < endX) && (mouseY < endY))) {
                     int row = (mouseY - startY) / cellSize;
                     int col = (mouseX - startX) / cellSize;
                     if (*(grid.data + (row*grid.gridWidth + col)) == 1) {
@@ -82,20 +82,24 @@ void readInput() {
             if (leftMouseDown) {
                 mouseX = event.button.x;
                 mouseY = event.button.y;
-                int row = (mouseY - startY) / cellSize;
-                int col = (mouseX - startX) / cellSize;
+                if (((mouseX > startX) && (mouseY > startY)) && ((mouseX < endX) && (mouseY < endY))) {
+                    int row = (mouseY - startY) / cellSize;
+                    int col = (mouseX - startX) / cellSize;
 
-                if (*(grid.data + (row*grid.gridWidth + col)) == 0) {
-                    *(grid.data + (row*grid.gridWidth + col)) = 1;
+                    if (*(grid.data + (row * grid.gridWidth + col)) == 0) {
+                        *(grid.data + (row * grid.gridWidth + col)) = 1;
+                    }
                 }
             } else if (rightMouseDown) {
                 mouseX = event.button.x;
                 mouseY = event.button.y;
-                int row = (mouseY - startY) / cellSize;
-                int col = (mouseX - startX) / cellSize;
+                if (((mouseX > startX) && (mouseY > startY)) && ((mouseX < endX) && (mouseY < endY))) {
+                    int row = (mouseY - startY) / cellSize;
+                    int col = (mouseX - startX) / cellSize;
 
-                if (*(grid.data + (row*grid.gridWidth + col)) == 1) {
-                    *(grid.data + (row*grid.gridWidth + col)) = 0;
+                    if (*(grid.data + (row * grid.gridWidth + col)) == 1) {
+                        *(grid.data + (row * grid.gridWidth + col)) = 0;
+                    }
                 }
             }
             break;
