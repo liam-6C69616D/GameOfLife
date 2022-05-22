@@ -95,6 +95,7 @@ int load_position_config() {
         }
         *(grid.data + (row*grid.gridWidth + col)) = 1;
     }
+    free(line);
     return 0;
 }
 
@@ -175,7 +176,9 @@ int load_game_config() {
             }
             token = strtok(NULL, ":");
         }
+        free(command);
     }
+    free(line);
 
     if (!widthSet) {
         printf("\nThe grid width command was not supplied! Read the README file for help!\n\n");
